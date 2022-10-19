@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_perguntas/ButtonMenu.dart';
 //import 'package:projeto_perguntas/respostas.dart';
 import './question.dart';
 import './respostas.dart';
 import './CamposDropDown.dart';
+import './resultado.dart';
+import 'ButtonMenu.dart';
 
 const List<String> listSafra = <String>['M22', 'U22_1', 'TU22'];
-//const List<String> listTalhao = <String>['M22', 'U22_1', 'TU22'];
+const List<String> listTalhao = <String>['A411', 'B412', 'C413', 'M414'];
 main() => runApp(AppFitossanidade());
 
 class _FitossanidadeAppState extends State<AppFitossanidade> {
@@ -17,7 +20,7 @@ class _FitossanidadeAppState extends State<AppFitossanidade> {
     },
     {
       'texto': 'Talhao: ',
-      'respostas': ['A414', 'B415', 'C416', 'D417', 'M411'],
+      'respostas': ['A414', 'B415', 'C416', 'D417', 'M411', 'M414'],
     },
     {
       'texto': 'Fundo Agrícola: ',
@@ -58,6 +61,12 @@ class _FitossanidadeAppState extends State<AppFitossanidade> {
     }
   }
 
+  void _reiniciarQuestionario() {
+    setState(() {
+      _campoSelecionado = 0;
+    });
+  }
+
   bool get temPerguntaSelecionada {
     return _campoSelecionado < _camposfito.length;
   }
@@ -74,6 +83,7 @@ class _FitossanidadeAppState extends State<AppFitossanidade> {
 
     return MaterialApp(
       home: Scaffold(
+        drawer: butaoMenu(),
         appBar: AppBar(
           title: Text(
             'App Fitossanidade',
@@ -92,13 +102,16 @@ class _FitossanidadeAppState extends State<AppFitossanidade> {
                   // DropdownButtonSafra(),
                   // DropdownButtonSafra(),
                   // DropdownButtonSafra(),
+                  // DropdownButtonTalhao(),
                 ],
               )
-            : Center(
-                child: Text(
-                'Concluído!',
-                style: TextStyle(fontSize: 28),
-              )),
+            : Resultado(_reiniciarQuestionario),
+        floatingActionButton: FloatingActionButton(
+          onPressed: null,
+          tooltip: 'Teste',
+          child: Icon(Icons.bug_report_sharp),
+          elevation: 16,
+        ),
       ),
     );
   }
@@ -156,6 +169,44 @@ class _DropdownButtonSafraState extends State<DropdownButtonSafra> {
           });
         },
         items: listSafra.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+////----# Dropdown TALHÃO
+class DropdownButtonTalhao extends StatefulWidget {
+  State<DropdownButtonTalhao> createState() => _DropdownButtonTalhaoState();
+}
+
+class _DropdownButtonTalhaoState extends State<DropdownButtonTalhao> {
+  String dropdownValue = listTalhao.first;
+
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      child: DropdownButton<String>(
+        value: dropdownValue,
+        icon: const Icon(Icons.arrow_drop_down),
+        iconEnabledColor: Colors.blue,
+        iconSize: 30,
+        elevation: 16,
+        style: const TextStyle(color: Colors.deepPurple, fontSize: 20),
+        underline: Container(
+          height: 2,
+          color: Colors.deepPurpleAccent,
+        ),
+        onChanged: (String? value) {
+          setState(() {
+            dropdownValue = value!;
+          });
+        },
+        items: listTalhao.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),
