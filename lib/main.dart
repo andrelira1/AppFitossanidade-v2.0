@@ -4,8 +4,8 @@ import './question.dart';
 import './respostas.dart';
 import './CamposDropDown.dart';
 
-const List<String> listSafra = <String>['M22', 'U22_1', 'TU22'];
-//const List<String> listTalhao = <String>['M22', 'U22_1', 'TU22'];
+const List<String> listSafra = <String>['Manga_2022', 'Manga_2023', 'Uva_2022', 'Uva_2023'];
+
 main() => runApp(AppFitossanidade());
 
 class _FitossanidadeAppState extends State<AppFitossanidade> {
@@ -13,15 +13,15 @@ class _FitossanidadeAppState extends State<AppFitossanidade> {
   final _camposfito = const [
     {
       'texto': 'Safra: ',
-      'respostas': ['M22', 'U22_1', 'TU22'],
+      'respostas': ['Manga_2022', 'Manga_2023', 'Uva_2022', 'Uva_2023'],
     },
     {
       'texto': 'Talhao: ',
-      'respostas': ['A414', 'B415', 'C416', 'D417', 'M411'],
+      'respostas': ['A1', 'B1', 'C1', 'D1', 'E1'],
     },
     {
-      'texto': 'Fundo Agrícola: ',
-      'respostas': ['Nova Fronteira', 'Bandeirante', 'Cauca', 'Lote 415'],
+      'texto': 'Fazenda: ',
+      'respostas': ['Farm1', 'Farm2', 'Farm3', 'Frm4'],
     },
     {
       'texto': 'Cultura: ',
@@ -35,9 +35,9 @@ class _FitossanidadeAppState extends State<AppFitossanidade> {
       'texto': 'Monitor: ',
       'respostas': [
         'André Lira',
-        'Bruno Guivares',
-        'Daniel Lopes',
-        'Isabela Thalita'
+        'Fulano de Tal',
+        'Beltrano da Manga',
+        'Siclano da Sanfona'
       ],
     },
   ];
